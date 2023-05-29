@@ -160,5 +160,5 @@ cython_debug/
 #.idea/
 
 # saved models
-"2. Preprocessing and Modeling/kt_logs/"
-"2. Preprocessing and Modeling/saved_models/"
+2.*Preprocessing*and*Modeling/kt_logs/
+2.*Preprocessing*and*Modeling/saved_models/
