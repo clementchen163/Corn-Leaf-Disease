@@ -1,5 +1,7 @@
 import os
 from tensorflow.keras.models import model_from_json
+import numpy as np
+from sklearn.metrics import f1_score, roc_curve, roc_auc_score, accuracy_score, recall_score, precision_score, confusion_matrix, ConfusionMatrixDisplay
 
 def save_model(model, directory):
     model_json = model.to_json()
@@ -22,7 +24,7 @@ def load_model(model_name):
                          metrics=['accuracy']) #Common metrics include 'accuracy', 'precision', 'recall', and 'f1_score'.
     return loaded_model
 
-def record_results(model_name, model, dataset):
+def record_results(model, model_name, dataset):
     '''
     Records metrics for given classifier
     ---Parameters---
