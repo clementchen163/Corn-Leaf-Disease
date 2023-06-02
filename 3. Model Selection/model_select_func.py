@@ -2,6 +2,8 @@ import os
 from tensorflow.keras.models import model_from_json
 import numpy as np
 from sklearn.metrics import f1_score, roc_curve, roc_auc_score, accuracy_score, recall_score, precision_score, confusion_matrix, ConfusionMatrixDisplay
+from PIL import Image
+import matplotlib.pyplot as plt
 
 def save_model(model, directory):
     model_json = model.to_json()
@@ -48,7 +50,25 @@ def record_results(model, model_name, dataset):
     return [model_name, f1, test_acc, precision, recall]
     #return [model_name, f1, test_acc, roc, precision, recall]
 
-
+def avg_image(class_, directory):
+    '''
+    Plots color averaged image of specific corn leaf class
+    ---Parameters---
+    class_ (str) name of directory of stored class images
+    directory (pathlib.WindowsPath object) parent directory where images are stored
+    ---Returns---
+    None
+    '''
+    ims=[]
+    for img in directory.glob(class_ + '/*.jpg'):
+        ims.append(Image.open(img))
+    ims = np.array([np.array(im) for im in ims])
+    ims_avg = np.average(ims, axis=0)
+    result = Image.fromarray(ims_avg.astype('uint8'))
+    plt.imshow(result)
+    plt.title('Average ' + class_ + ' Image')
+    plt.show()
+    return None
 
 
 
